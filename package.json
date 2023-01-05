@@ -1,0 +1,22 @@
+{
+  "name": "student-app-server",
+  "version": "0.1.0",
+  "description": "Backend server for the student app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosiahFu/student-app-server.git"
+  },
+  "author": "Josiah Fu josiahfu@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JosiahFu/student-app-server/issues"
+  },
+  "homepage": "https://github.com/JosiahFu/student-app-server#readme",
+  "dependencies": {
+    "server": "^1.0.38"
+  }
+}
