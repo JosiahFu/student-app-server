@@ -1,6 +1,6 @@
 import hashlib
 
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from functools import wraps
 
 app = Flask(__name__)
@@ -36,6 +36,16 @@ def login_required(func):
     return func(*args, **kwargs)
   return decorated_function
 
+@app.route('/')
+def serve_root():
+  return send_from_directory('www', 'index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+  """
+  Serve a static file from the www directory.
+  """
+  return send_from_directory('www', path)
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -80,18 +90,18 @@ def add_data():
   user = request.authorization.username
 
   # Get data from request
-  user_data = new_data.get('data')
-  if user_data is None:
+  # user_data = new_data.get('data')
+  if new_data is None:
     return 'Missing data field in request data', 400
 
   # Update data for user
   existing_user_data = data.get(user)
   if existing_user_data is None:
     # User does not have any data yet, add data to data dictionary
-    data[user] = user_data
+    data[user] = new_data
   else:
     # User has existing data, merge new data with existing data
-    existing_user_data.update(user_data)
+    existing_user_data.update(new_data)
 
   return 'Data added successfully', 201
 
@@ -127,4 +137,4 @@ def get_data():
   return curr, 200
 
 if __name__ == '__main__':
-  app.run()
+    app.run(host = '192.168.68.117', port = 2323)
